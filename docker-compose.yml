@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_USER: trademate, POSTGRES_PASSWORD: change-me, POSTGRES_DB: trademate }
+    volumes: [pgdata:/var/lib/postgresql/data]
+  redis:
+    image: redis:7-alpine
+  api:
+    image: node:22-alpine
+    working_dir: /app
+    command: npm run dev:api
+    env_file: .env
+    volumes: [.:/app]
+    ports: ["4000:4000"]
+    depends_on: [db, redis]
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: npm run dev
+    volumes: [.:/app]
+    ports: ["5173:5173"]
+    depends_on: [api]
+volumes: { pgdata: {} }

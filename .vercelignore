@@ -1,0 +1,4 @@
+*.test.ts
+Dockerfile
+docker-compose.yml
+prisma
