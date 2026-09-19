@@ -1,0 +1,18 @@
+{
+  "name": "TradeMate AI — NSE 500 Market Scanner",
+  "short_name": "TradeMate",
+  "description": "NSE 500 market scanner and paper-trading simulator. Educational / simulated — not financial advice. No real broker orders.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07110e",
+  "theme_color": "#07110e",
+  "lang": "en-IN",
+  "categories": ["finance", "business"],
+  "icons": [
+    {"src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

@@ -1,0 +1,7 @@
+export type ScanQuote={symbol:string;changePercent:number;relativeVolume:number;intradayRangePercent:number;distanceFromHighPercent:number;aboveShortMA:boolean;breakoutLevel?:number;price:number};
+export const movers=(q:ScanQuote[],threshold:number)=>q.filter(x=>x.changePercent>=threshold);
+export const topGainers=(q:ScanQuote[],limit=10)=>[...q].sort((a,b)=>b.changePercent-a.changePercent).slice(0,limit);
+export function momentum(q:ScanQuote){const parts={price:Math.min(30,Math.max(0,q.changePercent*5)),volume:Math.min(25,Math.max(0,(q.relativeVolume-1)*20)),range:Math.min(15,q.intradayRangePercent*3),nearHigh:Math.min(15,Math.max(0,15-q.distanceFromHighPercent*3)),trend:q.aboveShortMA?15:0};return{score:Math.round(Object.values(parts).reduce((a,b)=>a+b,0)),parts,reasons:Object.entries(parts).filter(([,v])=>v>0).map(([k])=>k)}}
+export function breakout(q:ScanQuote,volumeMultiplier=1.5,confirmationPercent=.2){if(!q.breakoutLevel)return false;return q.price>=q.breakoutLevel*(1+confirmationPercent/100)&&q.relativeVolume>=volumeMultiplier}
+export type PaperOrder={symbol:string;side:'BUY'|'SELL';quantity:number;price:number;stopLoss?:number;target?:number};
+export function validatePaperOrder(o:PaperOrder,balance:number){if(o.quantity<=0||o.price<=0)throw new Error('Quantity and price must be positive');if(o.side==='BUY'&&o.quantity*o.price>balance)throw new Error('Insufficient virtual balance');return{...o,capital:o.quantity*o.price,simulationOnly:true as const}}

@@ -1,0 +1,27 @@
+TradeMate AI — VS Code se Vercel deploy (SIMPLE)
+
+1) Purani trademate-ai folder VS Code se BAND karo.
+2) Yeh naya zip EXTRACT karo. Purani folder DELETE / replace karo.
+3) VS Code → File → Open Folder → nayi trademate-ai
+   (andar vercel.json dikhna chahiye)
+
+4) Terminal (Ctrl+`) :
+
+   git add -A
+   git commit -m "Fix Vercel build"
+   git push
+
+   Agar git nahi hai:
+
+   npx vercel login
+   npx vercel --prod
+
+5) Vercel dashboard → Settings → Environment Variables:
+   SESSION_SECRET = (random 32 chars)
+   BROKER_READ_ONLY = true
+
+6) Phir ek baar aur:  npx vercel --prod
+
+URL laptop + phone dono pe kholo.
+Settings → Connect DhanHQ
+Real orders nahi jaate — paper + scanner only.
